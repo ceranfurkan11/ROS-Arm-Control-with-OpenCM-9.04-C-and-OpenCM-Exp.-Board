@@ -1,0 +1,10 @@
+<launch>
+
+  
+  
+   <node name="my_python_node1" pkg="robot_control_exam" type="individual_all_joints_super_sliding_mode.py" output="screen"/>
+
+ <node name="rosbag_record" pkg="rosbag" type="record" output="screen" args="-o /home/furkan/catkin_ws/super_sliding.bag /q1_desired /q2_desired /q3_desired /qdot1_desired /qdot2_desired /qdot3_desired /qddot1_desired /qddot2_desired /qddot3_desired /q1 /q2 /q3 /qdot1 /qdot2 /qdot3 /torque1 /torque2 /torque3 /e1 /e2 /e3 /edot1 /edot2 /edot3 /pwm1 /pwm2 /pwm3"/> 
+
+
+</launch>

@@ -1,0 +1,30 @@
+<launch>
+
+ <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find robot_arm_control)/urdf/robot_arm_urdf.xacro'" />
+,
+  <!-- Launch Gazebo World -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="gui" value="true" />
+  </include>
+
+
+  <!-- Spawn My Robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+        args="-urdf -param robot_description -model robot_arm"/>
+        
+  <!-- Load joint controller configurations from YAML file to parameter server-->
+   <rosparam file="$(find robot_arm_control)/config/robot_arm_position_control.yaml" command="load"/> 
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/robot_arm" args="joint_state_controller joint1_position_controller joint2_position_controller joint3_position_controller"/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/robot_arm/joint_states" />
+  </node>
+ 
+  
+</launch>

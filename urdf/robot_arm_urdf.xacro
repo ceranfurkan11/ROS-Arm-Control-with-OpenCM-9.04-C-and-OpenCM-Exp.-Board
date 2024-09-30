@@ -1,0 +1,303 @@
+
+<robot name="robot_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find robot_arm_control)/urdf/materials.xacro" />
+
+<transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+   <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+
+   <link name="world"/>
+   
+    <joint name="base_joint" type="fixed">
+    <origin xyz="0.1 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+  
+  
+ <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.032819 -9.5135E-08 0.023396"
+        rpy="0 0 0" />
+      <mass
+        value="0.044388" />
+      <inertia
+        ixx="7.2697E-06"
+        ixy="-9.0457E-11"
+        ixz="-1.6077E-07"
+        iyy="1.2104E-05"
+        iyz="-6.0312E-11"
+        izz="1.0607E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_control/meshes/chain_link1.stl" scale="0.0005 0.0005 0.0005"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.10588 0.37255 0.66667 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_control/meshes/chain_link1.stl" scale="0.0005 0.0005 0.0005"/>
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link1">
+    <inertial>
+      <origin
+        xyz="-0.000427774758811648 0.0114772311445765 0.000457984176906887"
+        rpy="0 0 0" />
+      <mass
+        value="0.0579377195195475" />
+      <inertia
+        ixx="1.62305291756679E-05"
+        ixy="-1.47268653059401E-08"
+        ixz="-3.73158962448837E-09"
+        iyy="1.16692156882562E-05"
+        iyz="7.70718519004853E-07"
+        izz="1.64422521562704E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+           filename="package://robot_arm_control/meshes/chain_link2.stl" scale="0.0005 0.0005 0.0005"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.376470588235294 0.415686274509804 0.450980392156863 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+           filename="package://robot_arm_control/meshes/chain_link2.stl" scale="0.0005 0.0005 0.0005"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint1"
+    type="revolute">
+    <origin
+      xyz="0.007 0.0 0.0175"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit velocity="4.8" effort="1" lower="${-pi}" upper="${pi}" />
+  </joint>
+  <link
+    name="link2">
+    <inertial>
+      <origin
+        xyz="0.0101317764564883 0.0193375839984455 0.0975640850872068"
+        rpy="0 0 0" />
+      <mass
+        value="0.0867385889398329" />
+      <inertia
+        ixx="2.37695423940839E-05"
+        ixy="-1.35020717793047E-08"
+        ixz="1.14042246739592E-06"
+        iyy="2.80341012459844E-05"
+        iyz="6.40843810748748E-09"
+        izz="2.07527481757072E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_control/meshes/link2.STL" scale="0.5 0.5 0.5" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.603921568627451 0.647058823529412 0.686274509803922 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_control/meshes/link2.STL" scale="0.5 0.5 0.5"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint2"
+    type="revolute">
+    <origin
+      xyz="0.0007 -0.01 0.02"
+      rpy="0 0 0" />
+    <parent
+      link="link1" />
+    <child
+      link="link2" />
+    <axis
+      xyz="0 1 0" />
+    <limit velocity="4.8" effort="1" lower="${-pi}" upper="${pi}" />
+  </joint>
+  <link
+    name="link3">
+    <inertial>
+      <origin
+        xyz="-0.000713266428164216 0.0189953300113693 0.0633537567707178"
+        rpy="0 0 0" />
+      <mass
+        value="0.1715404036229261" />
+      <inertia
+        ixx="3.52961263417311E-05"
+        ixy="-2.88812939500777E-09"
+        ixz="1.99081878685035E-10"
+        iyy="3.44796983834701E-05"
+        iyz="4.73343425564599E-10"
+        izz="5.49796525857999E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_control/meshes/link3.STL" scale="0.5 0.5 0.5"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.603921568627451 0.647058823529412 0.686274509803922 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://robot_arm_control/meshes/link3.STL" scale="0.5 0.5 0.5"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint3"
+    type="revolute">
+    <origin
+      xyz="0.012 0 0.065"
+      rpy="0 1.5708 0" />
+    <parent
+      link="link2" />
+    <child
+      link="link3" />
+    <axis
+      xyz="0 1 0" />
+ <limit velocity="4.8" effort="1" lower="${-pi}" upper="${pi}" />
+  </joint>
+  
+
+  
+   <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/robot_arm</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+  
+ <gazebo reference="base_link">
+      <kp>1000000.0</kp>
+      <kd>100.0</kd>
+      <mu1>30.0</mu1>
+      <mu2>30.0</mu2>
+      <maxVel>1.0</maxVel>
+      <minDepth>0.001</minDepth>
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+      <gazebo reference="link1">
+      <kp>1000000.0</kp>
+      <kd>100.0</kd>
+      <mu1>30.0</mu1>
+      <mu2>30.0</mu2>
+      <maxVel>1.0</maxVel>
+      <minDepth>0.001</minDepth>
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
+    
+      <gazebo reference="link2">
+      <kp>1000000.0</kp>
+      <kd>100.0</kd>
+      <mu1>30.0</mu1>
+      <mu2>30.0</mu2>
+      <maxVel>1.0</maxVel>
+      <minDepth>0.001</minDepth>
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
+    
+      <gazebo reference="link3">
+      <kp>1000000.0</kp>
+      <kd>100.0</kd>
+      <mu1>30.0</mu1>
+      <mu2>30.0</mu2>
+      <maxVel>1.0</maxVel>
+      <minDepth>0.001</minDepth>
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
+  
+</robot>  
+
