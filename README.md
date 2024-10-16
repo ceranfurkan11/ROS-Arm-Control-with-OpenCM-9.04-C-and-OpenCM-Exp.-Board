@@ -6,3 +6,5 @@ Then '$catkin_make' in your workspace.
 2- Make connections between ROS and OpenCM by serial node: '$rosrun rosserial_server serial_node _port:=/dev/ttyACM0'.
 3- Launch Gazebo with '$roslaunch robot_arm_control robot_arm_position_control.launch'.
 4- Run the codes of you want. For example, '$rosrun robot_arm_control sliding_mode.py'.
+
+**You can watch the video with this link 'https://www.youtube.com/watch?v=elv_sppyBsA'.**
